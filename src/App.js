@@ -1,25 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Home from "./pages/Home";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route, Link
+} from "react-router-dom";
+import AddEvent from "./pages/AddEvent";
+import Login from "./pages/Login/Login";
+import PrivateRoute from "./PrivateRoute";
+import Register from "./pages/Register/Register";
+import Event from "./pages/Event/Event";
+import UserList from "./pages/UserList";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+
+  
+        <Route exact path="/">
+          <Home></Home>
+        </Route>
+
+
+        <Route exact path="/admin/addevent">
+          <AddEvent></AddEvent>
+        </Route>
+
+
+        <Route exact path="/admin/userlist">
+          <UserList></UserList>
+        </Route>
+
+
+        <Route exact path="/login">
+          <Login></Login>
+        </Route>
+
+        <PrivateRoute path="/register/:id">
+          <Register></Register>
+        </PrivateRoute>
+
+        <PrivateRoute path="/event">
+          <Event></Event>
+        </PrivateRoute>
+
+
+        <Route exact path="*">
+          <h1>page not found!</h1>
+          <Link to="/"> Go To Home Page</Link>
+        </Route>
+
+        
+      </Switch>
+    </Router>
   );
 }
 
